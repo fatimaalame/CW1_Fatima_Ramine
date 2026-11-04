@@ -22,16 +22,17 @@ import com.example.myfirstsensorapp.ui.theme.MyFirstSensorAppTheme //use the def
 //We create the mainactivity as extension of CompenentActivity similar to previous exercise with Jetpack compose
 
 ///// ECRAN PRINCIPAL
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+class MainActivity : ComponentActivity() { //concept d'héritage
+    override fun onCreate(savedInstanceState: Bundle?) { //fun=function et onCreate= nom imposé par android
+        //bundle ou null (absence de val)
+        super.onCreate(savedInstanceState) // super = class parente
         setContent { MyFirstSensorAppTheme {  SensorsScreen() }}
     }
 
 }
 
-@Composable
-fun SensorsScreen() {
+@Composable //fonction qui décrit l'écran
+fun SensorsScreen() { //fun=declare function
     val context = LocalContext.current
     // "Remember" stores the value across recompositions of a composable function.
     val sensorManager = remember {
