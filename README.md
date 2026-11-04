@@ -1,4 +1,4 @@
-#CW1 (D200011)
+# CW1 (D200011)
 
 ## Why this project? 
 Its for our 2nd year mandatory course "Séminaire de programmation". We are asked to create an app in android studio using that adapts with sensors. 
