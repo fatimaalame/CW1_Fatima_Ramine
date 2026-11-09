@@ -1,4 +1,4 @@
-package com.example.myfirstsensorapp // name of the package
+package com.example.myfirstsensorapp
 
 import android.content.Context  //to access android services (celui des capteurs aussi)
 import android.hardware.Sensor //to représent a sensor and identify its type
