@@ -352,6 +352,6 @@ private fun formatSensorValue (
     return if (value == null) {
         "indisponible"
     } else {
-        String.format(Locale.US, "%1f %s", value, unit)
+        String.format(Locale.US, "%.1f %s", value, unit)
     }
 }
