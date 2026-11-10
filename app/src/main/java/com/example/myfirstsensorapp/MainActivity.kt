@@ -77,6 +77,12 @@ fun BurgerWorldApp () {
     val temperatureSensor = remember {
         sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
     }
+
+    //here we got the values that are affichées à l'écran
+    var lightValue by remember { mutableStateOf<Float?>(null)}
+    var proximityValue by remember { mutableStateOf<Float?>(null)}
+    var temperatureValue by remember { mutableStateOf<Float?>(null)}
+
 }
 
 fun SensorsScreen() { //fun=declare function
