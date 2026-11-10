@@ -80,9 +80,9 @@ fun BurgerWorldApp () {
 
     //here we got the values that are affichées à l'écran
     // Get sensors (may be null on some devices ) & "?" declares the type as nullable
-    var lightValue by remember { mutableStateOf<Float?>(null)}
-    var proximityValue by remember { mutableStateOf<Float?>(null)}
-    var temperatureValue by remember { mutableStateOf<Float?>(null)}
+    var lightValue by remember { mutableStateOf<Float?>(null) }
+    var proximityValue by remember { mutableStateOf<Float?>(null) }
+    var temperatureValue by remember { mutableStateOf<Float?>(null) }
 
     val lightThreshold = 200f //seuil
 
@@ -96,9 +96,11 @@ fun BurgerWorldApp () {
                     Sensor.TYPE_LIGHT -> {
                         lightValue = event.values[0]
                     }
+
                     Sensor.TYPE_PROXIMITY -> {
                         proximityValue = event.values[0]
                     }
+
                     Sensor.TYPE_AMBIENT_TEMPERATURE -> {
                         temperatureValue = event.values[0]
                     }
@@ -108,7 +110,7 @@ fun BurgerWorldApp () {
             override fun onAccuracyChanged(
                 sensor: Sensor?,
                 accuracy: Int
-                ) { //nothging to do for this protoype
+            ) { //nothging to do for this protoype
             }
         }
     }
@@ -125,7 +127,7 @@ fun BurgerWorldApp () {
             )
         }
 
-        proximitySensor?.let{
+        proximitySensor?.let {
             sensorManager.registerListener(
                 sensorListener,
                 it,
@@ -134,7 +136,7 @@ fun BurgerWorldApp () {
         }
 
         temperatureSensor?.let {
-            sensorManager.registerListener (
+            sensorManager.registerListener(
                 sensorListener,
                 it,
                 SensorManager.SENSOR_DELAY_NORMAL
@@ -150,14 +152,24 @@ fun BurgerWorldApp () {
     val burgertate = when {
         lightValue != null && lightValue!! < lightThreshold ->
             BurgerState.SLEEPING
+
         (temperatureValue ?: Float.NEGATIVE_INFINITY) >= 35f ->
             BurgerState.MELTING
+
         proximityValue != null && proximityValue!! <= 5f ->
             BurgerState.SURPRISED
+
         else ->
             BurgerState.AWAKE
     }
 
+    BurgerWorldScreen(
+        burgerState = burgerState,
+        lightValue = lightValue,
+        proximityValue = proximityValue,
+        temperatureValue = temperatureValue
+    )
+}
     // UI
     // For more information about layout using composable, see Lecture 3
     // https://developer.android.com/courses/pathways/android-basics-compose-unit-1-pathway-3
