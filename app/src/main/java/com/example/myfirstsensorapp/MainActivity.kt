@@ -50,17 +50,18 @@ import java.util.Locale
 import androidx.compose.foundation.layout.offset
 import androidx.compose.animation.AnimatedContent
 
-
 //We create the mainactivity as extension of CompenentActivity similar to previous exercise with Jetpack compose
 
 ///// ECRAN PRINCIPAL
 class MainActivity : ComponentActivity() { //concept d'héritage
-    override fun onCreate(savedInstanceState: Bundle?) { //fun=function et onCreate= nom imposé par android
-        //bundle ou null (absence de val)
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState) // super = class parente
-        setContent { MyFirstSensorAppTheme {  SensorsScreen() }}
+        setContent {
+            MaterialTheme {
+                BurgerWorldApp()
+            }
+        }
     }
-
 }
 
 @Composable //fonction qui décrit l'écran
@@ -125,7 +126,9 @@ fun SensorsScreen() { //fun=declare function
     // For more information about layout using composable, see Lecture 3
     // https://developer.android.com/courses/pathways/android-basics-compose-unit-1-pathway-3
     Box(
-        modifier = Modifier.fillMaxSize().padding(24.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
         contentAlignment = Alignment.Center
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
