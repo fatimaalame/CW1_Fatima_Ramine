@@ -12,3 +12,9 @@ We took the "MyFirstSensorApp" example from the course and will turn it slowly i
 
 ## Tools used 
 As I said before, we're using Android Studio, Kotlin and JetPack Compose
+
+## Bibliography 
+- "MyFirstSensorApp" ->  Our starting point for reading the phone’s sensors. Example project provided by our professor, Pr. Fernández-Marquez
+- "Android Developers" (https://developer.android.com/develop/ui/compose/animation/quick-guide?hl=fr)
+- "Dreamstime" (https://www.dreamstime.com/artboard-image467564944) -> for the different burgers images
+- "Training Industry" (https://trainingindustry.com/articles/workforce-development/case-study-how-mcdonalds-integrates-learning-into-the-employee-experience/) -> Source of the restaurant photo used for the background and we did the tinted versions ourselves
