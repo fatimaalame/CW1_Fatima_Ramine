@@ -65,6 +65,20 @@ class MainActivity : ComponentActivity() { //concept d'héritage
 }
 
 @Composable //annotation qui décrit l'écran
+fun BurgerWorldApp () {
+    //SensorManager to access phone sensors
+    val sensorManager = applicationSensorManager()
+    val lightSensor = remember {
+        sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+    }
+    val proximitySensor = remember {
+        sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+    }
+    val temperatureSensor = remember {
+        sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
+    }
+}
+
 fun SensorsScreen() { //fun=declare function
     val context = LocalContext.current
     // "Remember" stores the value across recompositions of a composable function.
@@ -74,7 +88,9 @@ fun SensorsScreen() { //fun=declare function
 
     // Get sensors (may be null on some devices )
     // "?" declares the type as nullable
-    val lightSensor : Sensor? = remember { sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) }
+    val lightSensor : Sensor? = remember {
+        sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+    }
     val proximitySensor : Sensor? = remember { sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY) }
     val pressureSensor: Sensor? = remember { sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE) }
 
