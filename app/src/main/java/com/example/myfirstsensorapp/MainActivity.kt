@@ -178,6 +178,14 @@ private fun applicationSensorManager(): SenorManager {
         context.getSystemService(SensorManager::class.java)
     }
 }
+
+private enum class BurgerState {
+    AWAKE,
+    SLEEPING,
+    SURPRISED,
+    MELTING
+}
+
     // UI
     // For more information about layout using composable, see Lecture 3
     // https://developer.android.com/courses/pathways/android-basics-compose-unit-1-pathway-3
