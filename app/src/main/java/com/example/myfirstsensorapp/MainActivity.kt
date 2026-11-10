@@ -186,30 +186,52 @@ private enum class BurgerState {
     MELTING
 }
 
-    // UI
-    // For more information about layout using composable, see Lecture 3
-    // https://developer.android.com/courses/pathways/android-basics-compose-unit-1-pathway-3
+// UI
+// For more information about layout using composable, see Lecture 3
+// https://developer.android.com/courses/pathways/android-basics-compose-unit-1-pathway-3
+
+@Composable
+private fun BurgerWorldScreen (
+    burgerState: BurgerState,
+    lightValue: Float ?,
+    proximityValue: Float?,
+    temperatureValue: Float?
+) {
+
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text("Sensors", fontSize = 22.sp)
-            Text("Lumière: $light lx", fontSize = 18.sp)
-            if (light != null && light!! < 50) {
-                Text("Le burger dort")
-            } else {
-                Text("Le burger est réveillé")
+        modifier = Modifier.fillMaxSize()
+    )  {
+       //for the background selon l'état du burger
+        Image (
+           painter = painterResource(
+               when (burgerState) {
+                   BurgerState.SLEEPING -> R.drawable.restaurant_night
+                   BurgerState.MELTING -> R.drawable.restaurant_hot
+                   BurgerState.SURPRISED -> R.drawable.restaurant_frightened
+                   else -> R.drawable.restaurant_background
+               }
+           ),
+           contentDescription = null,
+           contentScale = ContentScale.Crop,
+           modifier = Modifier.fillMaxSize()
+        )
+
+        Column(
+            horizontalArrangement = Alignement.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .statusBarsPadding()
+                .navigationBarsPadding()
+                .verticalScroll((rememberScrollState())
+                .padding(start=18.dp,end=18.dp, top=36.dp,bottom=12.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(105.dp)
+           ) {
+                Image ()
             }
-            //using Elvis operator and formating the string. More stable interface,
-            // no null information appear on the screen.
-            //Text("Light: ${light?.let { String.format("%.1f lx", it) } ?: "-- lx"}", fontSize = 18.sp)
-            Text("Proximity: $proximity-- cm", fontSize = 18.sp)
-            //Text("Proximity: ${proximity?.let { String.format("%.1f cm", it) } ?: "-- cm"}", fontSize = 18.sp)
-            Text("Pressure: $pressure? hPa", fontSize = 18.sp)
-            //Text("Pressure: ${pressure?.let { String.format("%.1f hPa", it) } ?: "-- hPa"}", fontSize = 18.sp)
-        }
-    }
-}
+
+            }
+
