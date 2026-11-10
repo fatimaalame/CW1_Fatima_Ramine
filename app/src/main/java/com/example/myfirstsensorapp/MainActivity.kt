@@ -170,6 +170,14 @@ fun BurgerWorldApp () {
         temperatureValue = temperatureValue
     )
 }
+
+@Composable
+private fun applicationSensorManager(): SenorManager {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    return remember (context) {
+        context.getSystemService(SensorManager::class.java)
+    }
+}
     // UI
     // For more information about layout using composable, see Lecture 3
     // https://developer.android.com/courses/pathways/android-basics-compose-unit-1-pathway-3
