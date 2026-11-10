@@ -141,7 +141,12 @@ fun BurgerWorldApp () {
             )
         }
 
+        onDispose {
+            sensorManager.unregisterListener(sensorListener)
+        }
     }
+
+
 }
 
 fun SensorsScreen() { //fun=declare function
