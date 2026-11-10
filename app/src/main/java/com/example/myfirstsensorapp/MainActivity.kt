@@ -79,6 +79,7 @@ fun BurgerWorldApp () {
     }
 
     //here we got the values that are affichées à l'écran
+    // Get sensors (may be null on some devices ) & "?" declares the type as nullable
     var lightValue by remember { mutableStateOf<Float?>(null)}
     var proximityValue by remember { mutableStateOf<Float?>(null)}
     var temperatureValue by remember { mutableStateOf<Float?>(null)}
@@ -111,30 +112,11 @@ fun BurgerWorldApp () {
             }
         }
     }
+    //dispoEffect to make it start listening when screen on and stop when off
 
 }
 
 fun SensorsScreen() { //fun=declare function
-    val context = LocalContext.current
-    // "Remember" stores the value across recompositions of a composable function.
-    val sensorManager = remember {
-        context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-    }
-
-    // Get sensors (may be null on some devices )
-    // "?" declares the type as nullable
-    val lightSensor : Sensor? = remember {
-        sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
-    }
-    val proximitySensor : Sensor? = remember { sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY) }
-    val pressureSensor: Sensor? = remember { sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE) }
-
-    // Values to show
-    // "by" property delegation. we access the variable as light, instead of light.value
-    // "mutableStateOf" This is a state variable — if it changes, the sytem recomposes any UI elements that depend on it.
-    var light by remember { mutableStateOf<Float?>(null) }
-    var proximity by remember { mutableStateOf<Float?>(null) }
-    var pressure by remember { mutableStateOf<Float?>(null) }
 
     // Register/unregister a single listener
     // We use DisposableEffect, for side effects that need to be cleaned up after the keys change or if the composable leaves the Composition
