@@ -172,7 +172,7 @@ fun BurgerWorldApp () {
 }
 
 @Composable
-private fun applicationSensorManager(): SenorManager {
+private fun applicationSensorManager(): SensorManager {
     val context = androidx.compose.ui.platform.LocalContext.current
     return remember (context) {
         context.getSystemService(SensorManager::class.java)
