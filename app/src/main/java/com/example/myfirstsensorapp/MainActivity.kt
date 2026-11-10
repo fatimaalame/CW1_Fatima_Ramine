@@ -58,13 +58,13 @@ class MainActivity : ComponentActivity() { //concept d'héritage
         super.onCreate(savedInstanceState) // super = class parente
         setContent {
             MaterialTheme {
-                BurgerWorldApp()
+                BurgerWorldApp() //appel
             }
         }
     }
 }
 
-@Composable //fonction qui décrit l'écran
+@Composable //annotation qui décrit l'écran
 fun SensorsScreen() { //fun=declare function
     val context = LocalContext.current
     // "Remember" stores the value across recompositions of a composable function.
