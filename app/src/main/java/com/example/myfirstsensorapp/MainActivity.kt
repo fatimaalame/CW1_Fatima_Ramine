@@ -83,6 +83,8 @@ fun BurgerWorldApp () {
     var proximityValue by remember { mutableStateOf<Float?>(null)}
     var temperatureValue by remember { mutableStateOf<Float?>(null)}
 
+    val lightThreshold = 200f //seuil
+
 }
 
 fun SensorsScreen() { //fun=declare function
