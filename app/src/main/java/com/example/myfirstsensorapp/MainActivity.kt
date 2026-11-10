@@ -149,7 +149,7 @@ fun BurgerWorldApp () {
     }
 
     //implementing the diff burger states
-    val burgertate = when {
+    val burgerState = when {
         lightValue != null && lightValue!! < lightThreshold ->
             BurgerState.SLEEPING
 
@@ -217,21 +217,141 @@ private fun BurgerWorldScreen (
         )
 
         Column(
-            horizontalArrangement = Alignement.CenterHorizontally,
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
                 .statusBarsPadding()
                 .navigationBarsPadding()
-                .verticalScroll((rememberScrollState())
+                .verticalScroll(rememberScrollState())
                 .padding(start=18.dp,end=18.dp, top=36.dp,bottom=12.dp)
         ) {
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(105.dp)
            ) {
-                Image ()
+                Image ( //logo Uni
+                    painter = painterResource(R.drawable.logo_unige),
+                    contentDescription = "logo de l'uni",
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .align(Alignment.TopStart)
+                        .size(width=140.dp,height=60.dp)
+                )
+
+                Box (
+                    modifier = Modifier.align(Alignment.BottomCenter).offset(y=12.dp)
+                ) {
+                    Text (
+                        text = "CW1 RamFat",
+                        color = Color.White,
+                        fontSize = 36.sp,
+                        fontWeight = FontWeight.Black,
+                        textAlign = TextAlign.Center
+                    )
+                }
+           }
+
+            Spacer (modifier = Modifier.height(18.dp))
+            val burgerMessage = when(burgerState) {
+                BurgerState.AWAKE -> "Mike is awake"
+                BurgerState.SLEEPING -> "Mike is sleeping"
+                BurgerState.SURPRISED -> "Mike is afraid"
+                BurgerState.MELTING -> "Mike is melting"
             }
 
+            AnimatedContent(
+                targetState=burgerState,
+                label = "transition du burger"
+            ) { state ->
+                val image = when (state) {
+                    BurgerState.AWAKE -> R.drawable.burger_awake
+                    BurgerState.SLEEPING -> R.drawable.burger_sleeping
+                    BurgerState.SURPRISED -> R.drawable.burger_surprised
+                    BurgerState.MELTING -> R.drawable.hot_sun
+                }
+                Image(
+                    painter = painterResource(image),
+                    contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier.size(210.dp)
+                )
             }
 
+            Text(
+                text = burgerMessage,
+                color = Color.White,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Black,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            )
+
+            Spacer(modifier = Modifier.height(36.dp))
+
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White)
+                    .padding(24.dp)
+            ) {
+                Text (
+                    text = "MESURES",
+                    color = Color.Black,
+                    fontSize = 22.sp,
+                )
+
+                SensorLine (
+                    label = "Light ",
+                    value = formatSensorValue(lightValue, "lx")
+                )
+                SensorLine (
+                    label = "Proximity",
+                    value = formatSensorValue(proximityValue, "cm")
+                )
+                SensorLine(
+                    label = "Temperature ",
+                    value = formatSensorValue(temperatureValue, "degree (C)")
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun SensorLine(
+    label:String,
+    value: String
+){
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text (
+            text = "$label =",
+            color = Color.Black,
+            fontSize = 17.sp,
+            fontWeight = FontWeight.Normal
+        )
+        Text (
+            text = value,
+            color = Color.Black,
+            fontSize = 17.sp,
+        )
+    }
+}
+
+private fun formatSensorValue (
+    value: Float?,
+    unit:String
+):String{
+    return if (value == null) {
+        "indisponible"
+    } else {
+        String.format(Locale.US, "%1f %s", value, unit)
+    }
+}
