@@ -146,43 +146,16 @@ fun BurgerWorldApp () {
         }
     }
 
-
-}
-
-fun SensorsScreen() { //fun=declare function
-
-    DisposableEffect(lightSensor, proximitySensor, pressureSensor) {
-        val listener = object : SensorEventListener {
-            override fun onSensorChanged(event: SensorEvent) {
-                when (event.sensor.type) {
-                    Sensor.TYPE_LIGHT -> light = event.values.firstOrNull()
-                    Sensor.TYPE_PROXIMITY -> proximity = event.values.firstOrNull()
-                    Sensor.TYPE_PRESSURE -> pressure = event.values.firstOrNull()
-                }
-            }
-            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
-        }
-
-
-        //register the listener in SensorManager
-        fun reg(s: Sensor?, name: String) {
-            if (s != null){
-                sensorManager.registerListener(
-                    listener,
-                    s,
-                    SensorManager.SENSOR_DELAY_UI
-                )
-                Log.d("Sensors", "$name sensor registered")
-            } else {
-                Log.w("Sensors", "$name sensor not available on this device")
-            }
-        }
-
-        reg(lightSensor, "Light Sensor")
-        reg(proximitySensor, "Proximity Sensor")
-        reg(pressureSensor, "Pressure Sensor")
-
-        onDispose { sensorManager.unregisterListener(listener) }
+    //implementing the diff burger states
+    val burgertate = when {
+        lightValue != null && lightValue!! < lightThreshold ->
+            BurgerState.SLEEPING
+        (temperatureValue ?: Float.NEGATIVE_INFINITY) >= 35f ->
+            BurgerState.MELTING
+        proximityValue != null && proximityValue!! <= 5f ->
+            BurgerState.SURPRISED
+        else ->
+            BurgerState.AWAKE
     }
 
     // UI
