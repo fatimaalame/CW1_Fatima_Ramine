@@ -103,6 +103,12 @@ fun BurgerWorldApp () {
                     }
                 }
             }
+
+            override fun onAccuracyChanged(
+                sensor: Sensor?,
+                accuracy: Int
+                ) { //nothging to do for this protoype
+            }
         }
     }
 
