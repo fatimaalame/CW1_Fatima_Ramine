@@ -85,6 +85,27 @@ fun BurgerWorldApp () {
 
     val lightThreshold = 200f //seuil
 
+    val sensorListener = remember {
+        object : SensorEventListener {
+
+            override fun onSensorChanged(event: SensorEvent?) {
+                if (event == null) return
+
+                when (event.sensor.type) {
+                    Sensor.TYPE_LIGHT -> {
+                        lightValue = event.values[0]
+                    }
+                    Sensor.TYPE_PROXIMITY -> {
+                        proximityValue = event.values[0]
+                    }
+                    Sensor.TYPE_AMBIENT_TEMPERATURE -> {
+                        temperatureValue = event.values[0]
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 fun SensorsScreen() { //fun=declare function
