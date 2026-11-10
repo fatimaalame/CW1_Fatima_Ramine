@@ -112,15 +112,40 @@ fun BurgerWorldApp () {
             }
         }
     }
-    //dispoEffect to make it start listening when screen on and stop when off
+    //dispoEffect to make it start listening when screen on and stop when off + Register/unregister a single listener
+    //We use DisposableEffect, for side effects that need to be cleaned up after the keys change or if the composable leaves the Composition
+    // More information about side effects on https://developer.android.com/develop/ui/compose/side-effects
 
+    DisposableEffect(sensorManager) {
+        lightSensor?.let {
+            sensorManager.registerListener(
+                sensorListener,
+                it,
+                SensorManager.SENSOR_DELAY_NORMAL
+            )
+        }
+
+        proximitySensor?.let{
+            sensorManager.registerListener(
+                sensorListener,
+                it,
+                SensorManager.SENSOR_DELAY_NORMAL
+            )
+        }
+
+        temperatureSensor?.let {
+            sensorManager.registerListener (
+                sensorListener,
+                it,
+                SensorManager.SENSOR_DELAY_NORMAL
+            )
+        }
+
+    }
 }
 
 fun SensorsScreen() { //fun=declare function
 
-    // Register/unregister a single listener
-    // We use DisposableEffect, for side effects that need to be cleaned up after the keys change or if the composable leaves the Composition
-    // More information about side effects on https://developer.android.com/develop/ui/compose/side-effects
     DisposableEffect(lightSensor, proximitySensor, pressureSensor) {
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent) {
