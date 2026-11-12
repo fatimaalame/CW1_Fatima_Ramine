@@ -1,23 +1,17 @@
 package com.example.myfirstsensorapp
 
-import android.content.Context  //to access android services (celui des capteurs aussi)
 import android.hardware.Sensor //to représent a sensor and identify its type
 import android.hardware.SensorEvent //répresenter une nvl measure d'un sensor
 import android.hardware.SensorEventListener //define how to receive elements des sensors
 import android.hardware.SensorManager //trouver les capteurs et startstop sensors
 import android.os.Bundle //utiliser conteneur ds lequel android peut transmettre état saved
-import android.util.Log //écrire message de diagnostic + visible dans Logcat
 import androidx.activity.ComponentActivity //use une class android as a base to our screen
 import androidx.activity.compose.setContent //define le contenu de l'écran avec jetpack
-import androidx.compose.foundation.layout.* //use the tools as Box, Columm, padding,...
 import androidx.compose.material3.Text //afficher text avec composant Text
-import androidx.compose.runtime.* //utiliser Composable, remember, les états + effets
 import androidx.compose.ui.Alignment //Choisir alignement des elements
 import androidx.compose.ui.Modifier //define their size, marges, et d'autres proprio
-import androidx.compose.ui.platform.LocalContext //obtenir context androit depuis une fonction compose
 import androidx.compose.ui.unit.dp //use les unités de taille et déplacement dp
 import androidx.compose.ui.unit.sp //use les unités de texte sp
-import com.example.myfirstsensorapp.ui.theme.MyFirstSensorAppTheme //use the defined theme for our project
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
