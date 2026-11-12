@@ -102,7 +102,7 @@ fun BurgerWorldApp () {
                     }
 
                     Sensor.TYPE_AMBIENT_TEMPERATURE -> {
-                        temperatureValue = event.values[0]
+                        temperatureValue = event.values[0].takeIf { it.isFinite() && it >= -273.15f }
                     }
                 }
             }
